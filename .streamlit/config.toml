@@ -1,0 +1,10 @@
+[global]
+
+# Suppress Arrow serialization warnings
+showWarningOnDirectExecution = false
+
+[logger]
+level = "error"
+
+[client]
+showErrorDetails = false
