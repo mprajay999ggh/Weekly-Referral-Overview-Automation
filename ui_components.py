@@ -10,9 +10,10 @@ def setup_page_config():
     """Configure Streamlit page settings"""
     st.set_page_config(
         page_title="Referral Dashboard Generator",
-        page_icon="📊",
+        page_icon="https://media.licdn.com/dms/image/v2/D560BAQFSTXhdraFD5Q/company-logo_200_200/company-logo_200_200/0/1724431599059/groundgame_health_logo?e=2147483647&v=beta&t=m6wbKFRl8Ecxb7ECLTMRp0QLOMTJ-sOjUBBOGWtlNco",
         layout="wide"
     )
+
 
 
 def render_sidebar():
@@ -36,7 +37,7 @@ def render_sidebar():
 def render_file_uploader():
     """Render file upload widget"""
     return st.file_uploader(
-        "Upload Excel file", 
+        "", 
         type=['xlsx', 'xls'],
         help="Upload your Umoja Referral Overview Excel file"
     )
@@ -112,14 +113,17 @@ def render_excel_download_button(data):
     with st.spinner("Preparing Excel report..."):
         excel_data = create_excel_report(data, datetime.now())
         
-        # Direct download button
-        st.download_button(
-            label="📥 Download Excel Report",
+        # Enhanced download button with tooltip and success message
+        download_clicked = st.download_button(
+            label="Download Excel Report",
             data=excel_data,
             file_name=f"referral_dashboard_{datetime.now().strftime('%Y%m%d_%H%M')}.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-            type="primary"
+            type="primary",
+            help="Download the processed referral dashboard as an Excel file."
         )
+        if download_clicked:
+            st.success("Your Excel report is downloaded!")
 
 
 def render_data_info(df, today):
@@ -137,7 +141,7 @@ def render_data_info(df, today):
 
 def render_instructions():
     """Render instructions when no file is uploaded"""
-    st.info("👆 Please upload an Excel file to get started.")
+    # st.info("👆 Please upload an Excel file to get started.")
     
     # st.markdown("""
     # ### Expected File Format
