@@ -122,8 +122,7 @@ def render_excel_download_button(data):
             type="primary",
             help="Download the processed referral dashboard as an Excel file."
         )
-        if download_clicked:
-            st.success("Your Excel report is downloaded!")
+
 
 
 def render_data_info(df, today):
